@@ -323,7 +323,7 @@ export default function Accueil({ demarre }: { demarre: boolean }) {
                 data-info-titre="Lancer mon projet"
                 data-info="M'écrire pour parler de votre projet"
                 data-info-touche="4"
-                className="coupe group flex items-center gap-2 bg-neon px-6 py-3 font-mono text-xs font-semibold tracking-[0.2em] text-black uppercase transition-shadow hover:shadow-[0_0_30px_#ff2a2a] md:px-7 md:py-3.5"
+                className="coupe group flex items-center gap-2 bg-neon px-6 py-3 font-mono text-xs font-semibold tracking-[0.2em] text-black uppercase transition-shadow hover:shadow-[0_0_30px_#ff2a2a] md:px-5 md:py-3.5 xl:px-7"
               >
                 Lancer mon projet
                 <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -335,7 +335,7 @@ export default function Accueil({ demarre }: { demarre: boolean }) {
                 data-info-titre="Voir mes réalisations"
                 data-info={`Parcourir les ${projets.length} produits que j'ai lancés`}
                 data-info-touche="2"
-                className="border border-neon/50 bg-black/50 px-6 py-3 font-mono text-xs tracking-[0.2em] text-neon uppercase backdrop-blur-sm transition-colors hover:border-neon hover:bg-neon/10 md:px-7 md:py-3.5"
+                className="border border-neon/50 bg-black/50 px-6 py-3 font-mono text-xs tracking-[0.2em] text-neon uppercase backdrop-blur-sm transition-colors hover:border-neon hover:bg-neon/10 md:px-5 md:py-3.5 xl:px-7"
               >
                 Voir mes réalisations
               </a>
@@ -344,7 +344,7 @@ export default function Accueil({ demarre }: { demarre: boolean }) {
 
           <motion.p
             {...entree(1.8, demarre)}
-            className="mt-auto mb-8 flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase md:absolute md:bottom-10 md:left-10 md:m-0 lg:left-14"
+            className="mt-auto mb-8 flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase md:mt-12 md:mb-0"
           >
             <span className="flex size-8 items-center justify-center rounded-full border border-white/20">
               <ArrowDown className="size-3.5 animate-bounce" />

@@ -55,7 +55,7 @@ function Fond({ image }: { image?: string }) {
 }
 
 /** Le site, révélé par l'explosion d'entrée à la sortie de la séquence de démarrage. */
-export default function Site({ demarre, fond }: { demarre: boolean; fond?: string }) {
+export default function Site({ demarre, fond, portrait }: { demarre: boolean; fond?: string; portrait?: string }) {
   const suiteRef = useRef<HTMLDivElement>(null);
   const reduire = useReducedMotion();
   const [entreeFinie, setEntreeFinie] = useState(false);
@@ -81,7 +81,7 @@ export default function Site({ demarre, fond }: { demarre: boolean; fond?: strin
             <div ref={suiteRef} className="relative md:-ml-24 md:pl-24" style={{ background: FOND_SUITE }}>
               <FondTexte section={suiteRef} variante="rouge" />
               <div className="relative">
-                <Profil />
+                <Profil portrait={portrait} />
                 <Contact />
                 <PiedDePage />
               </div>

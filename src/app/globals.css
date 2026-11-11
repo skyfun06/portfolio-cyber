@@ -254,6 +254,24 @@ body {
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }
 
+/* Objet légendaire de l'inventaire : reflet qui traverse la case. */
+.inventaire-reflet {
+  background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.16) 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: inventaire-reflet 3.2s ease-in-out infinite;
+}
+
+@keyframes inventaire-reflet {
+  0% { background-position: 130% 0; }
+  45%, 100% { background-position: -130% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inventaire-reflet {
+    animation: none;
+  }
+}
+
 /* Texte trop long dans la fiche projet : défilement doux en boucle. */
 .defile {
   animation: defile 8s linear infinite;

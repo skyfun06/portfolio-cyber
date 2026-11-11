@@ -9,6 +9,6 @@ function image(nom: string) {
 }
 
 export default function Page() {
-  // Fond du site : `public/fond.jpg`.
-  return <Experience fond={image("fond")} />;
+  // Fond du site : `public/fond.jpg` ; portrait du Profil : `public/portrait.jpg` (sinon une silhouette).
+  return <Experience fond={image("fond")} portrait={image("portrait")} />;
 }
