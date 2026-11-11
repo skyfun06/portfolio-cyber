@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-chakra), var(--font-poppins), sans-serif;
+  --color-accent: #f97316;
+  --color-neon: #ff2a2a;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  @apply bg-black font-sans text-white antialiased;
+}
+
+@layer components {
+  .glass {
+    position: relative;
+    /* Reflet diagonal : plus clair en haut à gauche, comme une vitre qui capte la lumière. */
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.16), transparent 55%),
+      linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03) 60%, rgba(255, 255, 255, 0.06));
+    -webkit-backdrop-filter: blur(36px) saturate(190%) brightness(1.08);
+    backdrop-filter: blur(36px) saturate(190%) brightness(1.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.32),
+      0 2px 8px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+      inset 0 0 24px rgba(255, 255, 255, 0.04);
+  }
+
+  /* Bordure lumineuse en dégradé, dessinée par-dessus la bordure de base. */
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.12) 30%,
+      rgba(255, 255, 255, 0.04) 60%,
+      rgba(255, 255, 255, 0.28)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
+    .glass {
+      -webkit-backdrop-filter: blur(16px) saturate(180%) brightness(1.06);
+      backdrop-filter: blur(16px) saturate(180%) brightness(1.06);
+    }
+  }
+}
+
+/* ---------- Séquence de démarrage (noir et rouge) ---------- */
+
+.cyber-balayage {
+  animation: cyber-balayage 5s linear infinite;
+}
+
+@keyframes cyber-balayage {
+  from { top: -10rem; }
+  to { top: 100%; }
+}
+
+.cyber-rotation {
+  animation: cyber-rotation 24s linear infinite;
+}
+
+@keyframes cyber-rotation {
+  to { transform: rotate(360deg); }
+}
+
+.cyber-curseur {
+  animation: cyber-clignote 1s steps(1) infinite;
+}
+
+/* Logo : un tour complet comme une pièce, puis une pause. */
+.logo-pivot {
+  transform-style: preserve-3d;
+  animation: logo-pivot 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes logo-pivot {
+  0% { transform: rotateY(0deg); }
+  45%, 100% { transform: rotateY(360deg); }
+}
+
+.logo-anneau {
+  animation: cyber-rotation 10s linear infinite reverse;
+}
+
+@keyframes cyber-clignote {
+  50% { opacity: 0; }
+}
+
+.cyber-glitch {
+  position: relative;
+  text-shadow: 0 0 22px rgb(255 42 42 / 0.75);
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cyber-glitch::before {
+  color: #ff9a9a;
+  animation: cyber-glitch-a 1.6s steps(1) infinite;
+}
+
+.cyber-glitch::after {
+  color: #8a0000;
+  animation: cyber-glitch-b 1.3s steps(1) infinite;
+}
+
+@keyframes cyber-glitch-a {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  10% { clip-path: inset(10% 0 60% 0); transform: translate(-4px, 0); }
+  14% { clip-path: inset(70% 0 5% 0); transform: translate(3px, 0); }
+  18% { clip-path: inset(0 0 100% 0); transform: none; }
+  62% { clip-path: inset(40% 0 35% 0); transform: translate(-6px, 0); }
+  66% { clip-path: inset(0 0 100% 0); transform: none; }
+}
+
+@keyframes cyber-glitch-b {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  22% { clip-path: inset(55% 0 20% 0); transform: translate(5px, 0); }
+  26% { clip-path: inset(5% 0 75% 0); transform: translate(-3px, 0); }
+  30% { clip-path: inset(0 0 100% 0); transform: none; }
+  80% { clip-path: inset(30% 0 50% 0); transform: translate(4px, 0); }
+  84% { clip-path: inset(0 0 100% 0); transform: none; }
+}
+
+/* Grain d'écran qui saute d'une position à l'autre. */
+.crt-grain {
+  animation: crt-grain 0.6s steps(6) infinite;
+}
+
+@keyframes crt-grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-60px, 40px); }
+  40% { transform: translate(50px, -70px); }
+  60% { transform: translate(-90px, -20px); }
+  80% { transform: translate(30px, 80px); }
+  100% { transform: translate(0, 0); }
+}
+
+.crt-scintille {
+  animation: crt-scintille 0.12s steps(2) infinite;
+}
+
+@keyframes crt-scintille {
+  50% { opacity: 0; }
+}
+
+/* Rayures de danger qui défilent. */
+.danger-rayures {
+  background: repeating-linear-gradient(-45deg, #ff2a2a 0 18px, #000 18px 36px);
+  background-size: 51px 51px;
+  animation: danger-rayures 0.6s linear infinite;
+}
+
+@keyframes danger-rayures {
+  to { background-position: 51px 0; }
+}
+
+/* Écran qui se déchire pendant une alerte : secousses + tranches décalées. */
+.ecran-glitch {
+  animation: ecran-glitch 0.7s steps(1) both;
+}
+
+@keyframes ecran-glitch {
+  0% { transform: translate(-14px, 4px) skewX(6deg); clip-path: inset(0 0 62% 0); filter: hue-rotate(-20deg) brightness(1.8); }
+  8% { transform: translate(12px, -6px); clip-path: inset(30% 0 20% 0); filter: brightness(2.4) contrast(1.4); }
+  16% { transform: translate(-8px, 0) skewX(-4deg); clip-path: inset(58% 0 4% 0); filter: none; }
+  24% { transform: translate(10px, 3px); clip-path: none; filter: invert(1) hue-rotate(160deg); }
+  30% { transform: translate(-4px, -2px); clip-path: inset(12% 0 50% 0); filter: brightness(1.6); }
+  40% { transform: translate(6px, 0) skewX(3deg); clip-path: none; filter: none; }
+  52% { transform: translate(-3px, 2px); clip-path: inset(70% 0 0 0); }
+  60% { transform: translate(2px, -1px); clip-path: none; filter: brightness(1.4); }
+  72%, 100% { transform: none; clip-path: none; filter: none; }
+}
+
+/* Secousse brève (impact). */
+.ecran-secousse {
+  animation: ecran-secousse 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes ecran-secousse {
+  10% { transform: translate(-10px, 6px) scale(1.01); }
+  25% { transform: translate(12px, -8px) scale(1.01); }
+  40% { transform: translate(-8px, 4px); }
+  55% { transform: translate(6px, -3px); }
+  70% { transform: translate(-3px, 2px); }
+  100% { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-grain,
+  .crt-scintille,
+  .danger-rayures,
+  .ecran-glitch,
+  .ecran-secousse {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  .cyber-balayage,
+  .logo-pivot,
+  .logo-anneau,
+  .cyber-rotation,
+  .cyber-glitch::before,
+  .cyber-glitch::after {
+    animation: none;
+  }
+}
+
+/* ---------- Site (univers simulation) ---------- */
+
+::selection {
+  background: #ff2a2a;
+  color: #000;
+}
+
+/* Bouton plein aux coins coupés. */
+.coupe {
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+/* Texte trop long dans la fiche projet : défilement doux en boucle. */
+.defile {
+  animation: defile 8s linear infinite;
+}
+
+@keyframes defile {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .defile {
+    animation: none;
+  }
+}
+
+/* Image en caractères : bords fondus sur les 4 côtés, pour qu'elle se noie dans le fond. */
+.fondu-bords {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 8%, #000 92%, transparent),
+    linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 8%, #000 92%, transparent),
+    linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-composite: intersect;
+}
+
+/* Curseur personnalisé actif : on masque celui du système (sauf dans les champs de saisie). */
+.curseur-perso,
+.curseur-perso * {
+  cursor: none !important;
+}
+
+.curseur-perso input,
+.curseur-perso textarea {
+  cursor: text !important;
+}
